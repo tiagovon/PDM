@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: 706474d5-3d3c-4914-8df0-b04bb119914f
+
+localResources:
+  collections:
+    - ..\atv-pratica02\gestao-financeira-api\postman\collection.json

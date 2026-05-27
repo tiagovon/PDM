@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "Gestão Financeira API",
+    "description": "Collection de testes da API de gestão financeira (PDM). Configure a variável de ambiente baseUrl = http://localhost:3000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health-check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        },
+        "description": "Resposta esperada: { \"ok\": true, \"name\": \"gestao-financeira-api\" }"
+      }
+    },
+    {
+      "name": "2. Listar categorias",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/categories",
+          "host": ["{{baseUrl}}"],
+          "path": ["categories"]
+        },
+        "description": "Deve trazer as 5 categorias do seed. Copie o id da categoria income."
+      }
+    },
+    {
+      "name": "3. Criar categoria",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"health\",\n  \"displayName\": \"Saúde\",\n  \"icon\": \"favorite\",\n  \"background\": \"#FFB6B6\",\n  \"isIncome\": false\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/categories",
+          "host": ["{{baseUrl}}"],
+          "path": ["categories"]
+        },
+        "description": "Resposta esperada: 201 Created com o objeto criado (incluindo o id gerado)."
+      }
+    },
+    {
+      "name": "4. Atualizar categoria",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"displayName\": \"Saúde e Bem-estar\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/categories/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["categories", ":id"],
+          "variable": [{ "key": "id", "value": "COLE_O_ID_DA_CATEGORIA" }]
+        },
+        "description": "Resposta esperada: 200 OK com a categoria atualizada."
+      }
+    },
+    {
+      "name": "5. Excluir categoria",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/categories/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["categories", ":id"],
+          "variable": [{ "key": "id", "value": "COLE_O_ID_DA_CATEGORIA" }]
+        },
+        "description": "Resposta esperada: 204 No Content. Categoria padrão (ex.: income) retorna 400 com 'Categorias padrão não podem ser excluídas'."
+      }
+    },
+    {
+      "name": "6. Criar transação",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"description\": \"Salário de outubro\",\n  \"value\": 3500.50,\n  \"date\": \"2026-04-29\",\n  \"categoryId\": \"COLE_AQUI_O_ID_DA_CATEGORIA\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/transactions",
+          "host": ["{{baseUrl}}"],
+          "path": ["transactions"]
+        },
+        "description": "Resposta esperada: 201 Created já com category aninhada."
+      }
+    },
+    {
+      "name": "7. Listar transações",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/transactions",
+          "host": ["{{baseUrl}}"],
+          "path": ["transactions"]
+        },
+        "description": "Resposta esperada: 200 OK com lista de transações e category expandida."
+      }
+    },
+    {
+      "name": "8. Listar transações (filtro mês/ano)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/transactions?month=4&year=2026",
+          "host": ["{{baseUrl}}"],
+          "path": ["transactions"],
+          "query": [
+            { "key": "month", "value": "4" },
+            { "key": "year", "value": "2026" }
+          ]
+        },
+        "description": "Resposta esperada: 200 OK com transações filtradas pelo mês e ano."
+      }
+    },
+    {
+      "name": "9. Excluir transação",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/transactions/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["transactions", ":id"],
+          "variable": [{ "key": "id", "value": "COLE_O_ID_DA_TRANSACAO" }]
+        },
+        "description": "Resposta esperada: 204 No Content."
+      }
+    },
+    {
+      "name": "10. Validar erros",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"description\": \"\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/transactions",
+          "host": ["{{baseUrl}}"],
+          "path": ["transactions"]
+        },
+        "description": "Resposta esperada: 400 com { error: 'Dados inválidos', details: [...] } (Zod)."
+      }
+    }
+  ]
+}
