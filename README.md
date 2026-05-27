@@ -14,8 +14,12 @@ Backend em desenvolvimento.
 
 # Passo a passo — Gestão Financeira (PDM)
 
+## OS DIRETORIOS ESTAO NO DIRETORIO atv-pratica02
+
 Dois projetos: a API (`gestao-financeira-api`) e o app (`gestao-financeira-app`).
 Rode primeiro a API, valide no Postman, depois suba o app.
+
+
 
 ## 1. Subir o backend
 
@@ -27,7 +31,7 @@ npm run prisma:seed        # insere as 5 categorias padrão
 npm run dev                # API em http://localhost:3000
 ```
 
-## 2. Validar no Postman (antes de mexer no app)
+## 2. Validar no Postman NAO A NECESSIDADE PODE PULAR ESSA ETAPA 
 
 1. Importe `gestao-financeira-api/postman/collection.json`.
 2. A variável `baseUrl` já vem como `http://localhost:3000`.
