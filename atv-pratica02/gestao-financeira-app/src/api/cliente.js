@@ -7,7 +7,7 @@ import axios from 'axios';
 //   (ex.: http://192.168.0.10:3000) com o celular na mesma rede Wi-Fi.
 
 export const cliente = axios.create({
-  baseURL: 'http://192.168.0.158:3000',
+  baseURL: 'http://10.0.2.2:3000',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
