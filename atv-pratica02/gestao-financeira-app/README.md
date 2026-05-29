@@ -22,14 +22,6 @@ npm start
 
 Depois escolha rodar no navegador (`w`), Android (`a`) ou iOS (`i`).
 
-### Atenção à URL da API
-
-O arquivo `src/api/cliente.js` usa `http://localhost:3000`. Isso funciona no
-Expo Web e no iOS Simulator. Em outros casos, ajuste:
-
-- Emulador Android: `http://10.0.2.2:3000`
-- Celular físico: `http://SEU_IP_LOCAL:3000` (ex.: `http://192.168.0.10:3000`),
-  com o celular na mesma rede Wi-Fi do computador.
 
 ## Login de teste
 
